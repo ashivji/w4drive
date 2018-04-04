@@ -41,22 +41,10 @@ try:
                 time.sleep(1)
                 if(os.path.getsize('wpa.cap') > 24):
                     cmd = ['cp', 'wpa.cap', line+".cap"]
-                    process=subprocess.Popen(cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE).wait()
-                    while True:
-                        out = process.stdout.read(1)
-                        if out == '' and process.poll() != None:
-                            break
-                        if out != '':
-                            sys.stdout.write(out)
-                            sys.stdout.flush()
-                    time.sleep(1)
-                    cmd=['cp','tmp','wpa.cap']
                     subprocess.Popen(cmd).wait()
-                    time.sleep(1)
-                    #cmd=['/usr/bin/cap2hccapx.bin',line+".cap",line+".hccapx"]
+                    cmd=['/usr/bin/cap2hccapx.bin',line+".cap",line+".hccapx"]
                     subprocess.Popen(cmd).wait()
-                    time.sleep(1)
-                    #sftp.put(line+".hccapx",line+".hccapx")
+                    sftp.put(line+".hccapx",line+".hccapx")
                     #os.system("cp wpa.cap " + line+".cap")
                     #os.system("rm wpa.cap")
                     #os.system("cp tmp wpa.cap")
